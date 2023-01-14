@@ -14,8 +14,8 @@ class AccessToken extends Migration
     public function up()
     {
         Schema::create('access_token', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->string('user_id', 36);
+            $table->uuid('id')->primary();
+            $table->uuid('user_id')->nullable(false);
             $table->string('token')->nullable();
             $table->timestamps();
             $table->timestamp('expired_at')->nullable();

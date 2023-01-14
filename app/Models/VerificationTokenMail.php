@@ -9,5 +9,6 @@ class VerificationTokenMail extends Model
 {
     use HasFactory;
     public $incrementing = false;
+    public $keyType = 'string';
     protected $table = 'verification_mail';
 }

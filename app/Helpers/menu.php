@@ -10,7 +10,7 @@ if(! function_exists('getMenuParent')){
 				->whereHas('access', function($q){
 					$q->where('role_id', Session::get('role_id'));
 				})
-				->where('parent_id', "0")
+				->where('parent_id', null)
 				->where('deleted_at', null)
 				->orderBy('order_num', 'ASC')
 				->get();

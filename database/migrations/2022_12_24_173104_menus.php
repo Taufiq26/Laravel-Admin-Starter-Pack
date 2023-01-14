@@ -14,9 +14,9 @@ class Menus extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->string('prefix')->default('0');
-            $table->string('parent_id', 36)->default('0');
+            $table->uuid('id')->primary();
+            $table->string('prefix')->default('-');
+            $table->uuid('parent_id')->nullable();
             $table->string('name');
             $table->string('icon')->nullable();
             $table->string('url');

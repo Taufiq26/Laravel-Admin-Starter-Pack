@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MenuSeeder extends Seeder
 {
@@ -57,7 +58,7 @@ class MenuSeeder extends Seeder
             [
                 'id' => '898a77c5-e21f-46f7-9092-3eb71aef1f7e',
                 'prefix' => '-',
-                'parent_id' => '0',
+                'parent_id' => NULL,
                 'name' => 'General',
                 'icon' => '-',
                 'url' => '#',
@@ -67,7 +68,7 @@ class MenuSeeder extends Seeder
             [
                 'id' => '9f8b78b9-5856-4653-8970-ea125971f4cb',
                 'prefix' => '-',
-                'parent_id' => '0',
+                'parent_id' => NULL,
                 'name' => 'Setup',
                 'icon' => '-',
                 'url' => '#',
@@ -96,7 +97,7 @@ class MenuSeeder extends Seeder
             ],
             [
                 'id' => 'e4e9e6b4-f421-42db-bafe-10c3a7ff45fc',
-                'prefix' => '-',
+                'prefix' => '/users-management',
                 'parent_id' => '9f8b78b9-5856-4653-8970-ea125971f4cb',
                 'name' => 'Users Management',
                 'icon' => 'settings',

@@ -12,6 +12,7 @@ class Users extends Model
     use HasFactory;
 
     public $incrementing = false;
+    public $keyType = 'string';
     protected $table = 'users';
 
     function roles()

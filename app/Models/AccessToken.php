@@ -10,6 +10,7 @@ class AccessToken extends Model
     use HasFactory;
     
     public $incrementing = false;
+    public $keyType = 'string';
 	public $timestamps = false;
     protected $table = 'access_token';
 }

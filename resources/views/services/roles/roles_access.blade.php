@@ -29,7 +29,7 @@
                 destroy = '';
             }
 
-            if(val.parent_id == '0' && val.url == '#'){
+            if(val.parent_id == NULL && val.url == '#'){
                 html += '<tr class="bg-warning">'+
                     '<td>'+(key+1)+'</td>'+
                     '<td>'+val.name+'</td>'+

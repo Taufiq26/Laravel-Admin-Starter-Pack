@@ -10,5 +10,6 @@ class MenusAccess extends Model
     use HasFactory;
 
     public $incrementing = false;
+    public $keyType = 'string';
     protected $table = 'menu_access';
 }
