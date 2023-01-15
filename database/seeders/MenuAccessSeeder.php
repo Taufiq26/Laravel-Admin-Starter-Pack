@@ -98,7 +98,7 @@ class MenuAccessSeeder extends Seeder
             ],
             [
                 'id' => 'd1e94377-f63d-4090-82ca-bca83e661990',
-                'role_id' => '62dffe94-5b08-45fe-9121-eb8177fa5721',
+                'role_id' => '67b885dd-382b-43c8-bbdc-9eb9fc14b574',
                 'menu_id' => '35ea5852-b821-43e2-acea-78aa2381760c',
                 'view' => 1,
                 'create' => 0,

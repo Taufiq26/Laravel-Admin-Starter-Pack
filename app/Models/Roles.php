@@ -14,4 +14,9 @@ class Roles extends Model
     public $incrementing = false;
     public $keyType = 'string';
     protected $table = 'roles';
+
+    public function access()
+    {
+        return $this->hasMany(MenusAccess::class, 'role_id', 'id');
+    }
 }

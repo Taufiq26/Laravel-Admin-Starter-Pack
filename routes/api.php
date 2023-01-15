@@ -40,6 +40,7 @@ Route::prefix('menus')->group( function(){
 Route::prefix('menu-access')->group( function(){
     Route::get('/', [MenusAccessController::class, 'retrive']);
     Route::get('/{id}', [MenusAccessController::class, 'retriveById']);
+    Route::get('/by-role/{role_id}', [MenusAccessController::class, 'retriveByRole']);
     Route::post('/create', [MenusAccessController::class, 'create']);
     Route::post('/update/{id}', [MenusAccessController::class, 'update']);
     Route::delete('/delete/{id}', [MenusAccessController::class, 'delete']);

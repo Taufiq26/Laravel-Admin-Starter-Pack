@@ -44,6 +44,31 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-10">
+                                <label for="role">Choose Role</label>
+                                <select name="role" id="role" class="form-control">
+                                    @foreach($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-2 d-flex justify-content-center">
+                                <button 
+                                    id="refresh" 
+                                    type="button" 
+                                    class="btn btn-primary" 
+                                    style="bottom: 0; position: absolute;"
+                                >
+                                Refresh</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
                         <div class="table-responsive">
 	                        <table class="display datatables" id="dataTableMenus">
 	                            <thead>

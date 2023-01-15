@@ -6,79 +6,8 @@
         var update_access = "<?php echo e($access['update']); ?>";
         var delete_access = "<?php echo e($access['delete']); ?>";
 
-        $('#dataTableMenus').DataTable({
-			"bLengthChange":true,
-			"pageLength":10,
-			"ajax" : "<?php echo e(url('api/menu-access')); ?>",
-			"columns": 
-			[
-			{ 
-				targets:[0], 
-				render: function(data, type, full, meta){
-					return no++;
-				}
-			},
-			{ targets:[1],data: "menu.name" },
-			{ 
-                targets:[2],
-                render: function (data, type, full, meta){
-                    if(full.view == 1){
-                        return '<span class="badge badge-primary">Allowed</span>';
-                    }else{
-                        return '<span class="badge badge-danger">Denied</span>';
-                    }
-                } 
-            },
-            { 
-                targets:[3],
-                render: function (data, type, full, meta){
-                    if(full.create == 1){
-                        return '<span class="badge badge-primary">Allowed</span>';
-                    }else{
-                        return '<span class="badge badge-danger">Denied</span>';
-                    }
-                }
-            },
-            { 
-                targets:[4],
-                render: function (data, type, full, meta){
-                    if(full.update == 1){
-                        return '<span class="badge badge-primary">Allowed</span>';
-                    }else{
-                        return '<span class="badge badge-danger">Denied</span>';
-                    }
-                }
-            },
-            { 
-                targets:[5],
-                render: function (data, type, full, meta){
-                    if(full.delete == 1){
-                        return '<span class="badge badge-primary">Allowed</span>';
-                    }else{
-                        return '<span class="badge badge-danger">Denied</span>';
-                    }
-                }
-            },
-			{
-				targets:[6],
-				render: function (data, type, full, meta){
-                    if(update_access == 1){
-					    var btn_edit='<button class="btn btn-warning btn-sm" name="btn_edit" title="Edit" value="'+full.id+'"><i class="fa fa-pencil"></i> Edit</button>';
-                    }else{
-                        var btn_edit = '';
-                    }
-
-                    if(delete_access == 1){
-					    var btn_hapus='<button class="btn btn-danger btn-sm" name="btn_hapus" title="Hapus" value="'+full.id+'"><i class="fa fa-trash"></i> Hapus</button>';
-                    }else{
-                        var btn_hapus = '';
-                    }
-
-					return '<center>'+btn_edit+'&nbsp;'+btn_hapus+'</center>';
-				}
-			}
-			]
-		})
+        setDataTable($('#role').val());
+        
 
         $('#btn_insert').click(function(event) {
 			$('#form-menus').modal('show');
@@ -174,6 +103,91 @@
                 }
             })
 		});
+
+        $('#refresh').on('click',function(event){
+			event.preventDefault()
+            // destroy data table first
+            $('#dataTableMenus').DataTable().destroy();
+            // re-init the data table
+            no = 1;
+            setDataTable($('#role').val());
+		});
+
+        function setDataTable(role_id){
+            $('#dataTableMenus').DataTable({
+                "bLengthChange":true,
+                "pageLength":10,
+                "ajax" : "<?php echo e(url('api/menu-access/by-role')); ?>/" + role_id,
+                "columns": 
+                [
+                { 
+                    targets:[0], 
+                    render: function(data, type, full, meta){
+                        return no++;
+                    }
+                },
+                { targets:[1],data: "menu.name" },
+                { 
+                    targets:[2],
+                    render: function (data, type, full, meta){
+                        if(full.view == 1){
+                            return '<span class="badge badge-primary">Allowed</span>';
+                        }else{
+                            return '<span class="badge badge-danger">Denied</span>';
+                        }
+                    } 
+                },
+                { 
+                    targets:[3],
+                    render: function (data, type, full, meta){
+                        if(full.create == 1){
+                            return '<span class="badge badge-primary">Allowed</span>';
+                        }else{
+                            return '<span class="badge badge-danger">Denied</span>';
+                        }
+                    }
+                },
+                { 
+                    targets:[4],
+                    render: function (data, type, full, meta){
+                        if(full.update == 1){
+                            return '<span class="badge badge-primary">Allowed</span>';
+                        }else{
+                            return '<span class="badge badge-danger">Denied</span>';
+                        }
+                    }
+                },
+                { 
+                    targets:[5],
+                    render: function (data, type, full, meta){
+                        if(full.delete == 1){
+                            return '<span class="badge badge-primary">Allowed</span>';
+                        }else{
+                            return '<span class="badge badge-danger">Denied</span>';
+                        }
+                    }
+                },
+                {
+                    targets:[6],
+                    render: function (data, type, full, meta){
+                        if(update_access == 1){
+                            var btn_edit='<button class="btn btn-warning btn-sm" name="btn_edit" title="Edit" value="'+full.id+'"><i class="fa fa-pencil"></i> Edit</button>';
+                        }else{
+                            var btn_edit = '';
+                        }
+
+                        if(delete_access == 1){
+                            var btn_hapus='<button class="btn btn-danger btn-sm" name="btn_hapus" title="Hapus" value="'+full.id+'"><i class="fa fa-trash"></i> Hapus</button>';
+                        }else{
+                            var btn_hapus = '';
+                        }
+
+                        return '<center>'+btn_edit+'&nbsp;'+btn_hapus+'</center>';
+                    }
+                }
+                ]
+            })
+        }
 
         function notificationSuccess(message){
             $.notify({

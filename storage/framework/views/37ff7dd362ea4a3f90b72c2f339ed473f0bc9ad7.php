@@ -43,6 +43,31 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-10">
+                                <label for="role">Choose Role</label>
+                                <select name="role" id="role" class="form-control">
+                                    <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($role->id); ?>"><?php echo e($role->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-2 d-flex justify-content-center">
+                                <button 
+                                    id="refresh" 
+                                    type="button" 
+                                    class="btn btn-primary w-auto" 
+                                    style="bottom: 0; position: absolute;"
+                                >
+                                Refresh</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
                         <div class="table-responsive">
 	                        <table class="display datatables" id="dataTableMenus">
 	                            <thead>
