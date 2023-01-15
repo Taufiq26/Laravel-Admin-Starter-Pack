@@ -19,10 +19,46 @@
 				}
 			},
 			{ targets:[1],data: "menu.name" },
-			{ targets:[2],data: "view" },
-            { targets:[3],data: "create" },
-            { targets:[4],data: "update" },
-            { targets:[5],data: "delete" },
+			{ 
+                targets:[2],
+                render: function (data, type, full, meta){
+                    if(full.view == 1){
+                        return '<span class="badge badge-primary">Allowed</span>';
+                    }else{
+                        return '<span class="badge badge-danger">Denied</span>';
+                    }
+                } 
+            },
+            { 
+                targets:[3],
+                render: function (data, type, full, meta){
+                    if(full.create == 1){
+                        return '<span class="badge badge-primary">Allowed</span>';
+                    }else{
+                        return '<span class="badge badge-danger">Denied</span>';
+                    }
+                }
+            },
+            { 
+                targets:[4],
+                render: function (data, type, full, meta){
+                    if(full.update == 1){
+                        return '<span class="badge badge-primary">Allowed</span>';
+                    }else{
+                        return '<span class="badge badge-danger">Denied</span>';
+                    }
+                }
+            },
+            { 
+                targets:[5],
+                render: function (data, type, full, meta){
+                    if(full.delete == 1){
+                        return '<span class="badge badge-primary">Allowed</span>';
+                    }else{
+                        return '<span class="badge badge-danger">Denied</span>';
+                    }
+                }
+            },
 			{
 				targets:[6],
 				render: function (data, type, full, meta){

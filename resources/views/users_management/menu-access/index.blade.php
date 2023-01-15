@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('title')
-    Menu Access
+    Menus Access
     {{ $title }}
 @endsection
 
@@ -14,11 +14,11 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-lg-6">
-                    <h3>Menu Access</h3>
+                    <h3>Menus Access</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
                         <li class="breadcrumb-item">Users Management</li>
-                        <li class="breadcrumb-item active">Menu Access</li>
+                        <li class="breadcrumb-item active">Menus Access</li>
                     </ol>
                 </div>
                 <div class="col-lg-6">
