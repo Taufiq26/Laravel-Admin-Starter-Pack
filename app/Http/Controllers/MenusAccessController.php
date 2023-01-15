@@ -30,6 +30,7 @@ class MenusAccessController extends Controller
     // Api Function
     public function retrive()
     {
+        // To-Do : Data yg ditampilkan harus berdasarkan filter role yg dipilih
         $data = MenusAccess::with('menu')->get();
 
         return response()->json(array(
