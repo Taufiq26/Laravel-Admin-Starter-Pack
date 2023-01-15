@@ -8,27 +8,29 @@ use App\Models\Menus;
 use App\Models\MenusAccess;
 use App\Models\Roles;
 
-class MenusController extends Controller
+class MenusAccessController extends Controller
 {
     // Web function
     public function __Construct() {
-        $this->menu= "Menus";
+        $this->menu = "Menu Access";
     }
 
     public function index(Request $request) {
         $access = getMenuAccess($this->menu);
-        $menus  = Menus::with('access')->orderBy('created_at', 'ASC')->get();
+        $menus  = Menus::get();
+        $roles  = Roles::get();
 
-        return view('users_management.menus.index', [
+        return view('users_management.menu-access.index', [
             'access' => $access,
             'menus' => $menus,
+            'roles' => $roles,
         ]);
     }
 
     // Api Function
     public function retrive()
     {
-        $data = Menus::with('access')->orderBy('created_at', 'ASC')->get();
+        $data = MenusAccess::with('menu')->get();
 
         return response()->json(array(
             'status'=> 200, 
@@ -39,7 +41,7 @@ class MenusController extends Controller
 
     public function retriveById($id)
     {
-        $data = Menus::with('access')->where('id', $id)->first();
+        $data = Menus::with('menu')->where('id', $id)->first();
 
         return response()->json(array(
             'status'=> 200, 
@@ -60,19 +62,6 @@ class MenusController extends Controller
         $data->status = $request->post('status');
         $data->order_num = $request->post('order_num');
         $data->save();
-
-        $admin_role = Roles::where('name','Admin')->first();
-        if ($admin_role) {
-            $access = new MenusAccess();
-            $access->id = Str::uuid();
-            $access->role_id = $admin_role->id;
-            $access->menu_id = $data->id;
-            $access->view = 1;
-            $access->create = 1;
-            $access->update = 1;
-            $access->delete = 1;
-            $access->save();
-        }
 
         return response()->json(array(
             'status'=> 200, 

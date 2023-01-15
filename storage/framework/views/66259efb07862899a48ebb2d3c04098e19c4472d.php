@@ -110,6 +110,7 @@
 				_selectedID = res.data.id;
                 
                 document.getElementById('id').value = res.data.id;
+                document.getElementById('parent_id').value = res.data.parent_id ?? "";
                 document.getElementById('name').value = res.data.name;
                 document.getElementById('prefix').value = res.data.prefix;
                 document.getElementById('url').value = res.data.url;

@@ -81,7 +81,7 @@
                         <div class="form-group">
                             <label for="">Parent</label>
                             <select class="form-select" name="parent_id" id="parent_id">
-                                <option value="0">Parent</option>
+                                <option value="">Parent</option>
                                 <?php foreach($menus as $menu):?>
                                     <option value="{{ $menu->id }}">{{ $menu->name }}</option>
                                 <?php endforeach; ?>

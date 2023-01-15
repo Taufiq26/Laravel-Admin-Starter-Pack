@@ -20,8 +20,8 @@ class UsersController extends Controller
 
     public function index(Request $request) {
         $access = getMenuAccess($this->menu);
-        $users  = Menus::with('access')->where('deleted_at', null)->orderBy('created_at', 'ASC')->get();
-        $roles  = Roles::where('deleted_at', null)->get();
+        $users  = Menus::with('access')->orderBy('created_at', 'ASC')->get();
+        $roles  = Roles::get();
 
         return view('users_management.users.index', [
             'access' => $access,
@@ -33,7 +33,7 @@ class UsersController extends Controller
     // Api Function
     public function retrive()
     {
-        $data = Profiles::with('users', 'users.roles')->where('deleted_at', null)->orderBy('created_at', 'ASC')->get();
+        $data = Profiles::with('users', 'users.roles')->orderBy('created_at', 'ASC')->get();
 
         return response()->json(array(
             'status'=> 200, 

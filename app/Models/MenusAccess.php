@@ -11,5 +11,10 @@ class MenusAccess extends Model
 
     public $incrementing = false;
     public $keyType = 'string';
-    protected $table = 'menu_access';
+    protected $table = 'menus_access';
+
+    public function menu()
+    {
+        return $this->belongsTo(Menus::class);
+    }
 }

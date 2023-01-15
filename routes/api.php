@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\MenusController;
+use App\Http\Controllers\MenusAccessController;
 use App\Http\Controllers\UsersController;
 
 /*
@@ -33,6 +34,15 @@ Route::prefix('menus')->group( function(){
     Route::post('/create', [MenusController::class, 'create']);
     Route::post('/update/{id}', [MenusController::class, 'update']);
     Route::delete('/delete/{id}', [MenusController::class, 'delete']);
+});
+
+// Menus
+Route::prefix('menu-access')->group( function(){
+    Route::get('/', [MenusAccessController::class, 'retrive']);
+    Route::get('/{id}', [MenusAccessController::class, 'retriveById']);
+    Route::post('/create', [MenusAccessController::class, 'create']);
+    Route::post('/update/{id}', [MenusAccessController::class, 'update']);
+    Route::delete('/delete/{id}', [MenusAccessController::class, 'delete']);
 });
 
 // Access

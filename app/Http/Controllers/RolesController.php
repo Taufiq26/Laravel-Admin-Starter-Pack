@@ -29,7 +29,7 @@ class RolesController extends Controller
 
     public function accessPost(Request $request, $id)
     {
-        $menus = Menus::where('deleted_at', null)->orderBy('created_at', 'ASC')->get();
+        $menus = Menus::orderBy('created_at', 'ASC')->get();
 
         foreach ($menus as $menu) {
             $view = 'view_'.$menu->id;
@@ -67,7 +67,7 @@ class RolesController extends Controller
     // Api Function
     public function retrive()
     {
-        $data = Roles::where('deleted_at', null)->get();
+        $data = Roles::get();
 
         return response()->json(array(
             'status'=> 200, 

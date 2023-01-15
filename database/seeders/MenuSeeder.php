@@ -23,6 +23,16 @@ class MenuSeeder extends Seeder
                 'icon' => '-',
                 'url' => 'users',
                 'status' => 1,
+                'order_num' => 4,
+            ],
+            [
+                'id' => '8240964a-f1ea-4cfe-9930-e5390739a212',
+                'prefix' => '-',
+                'parent_id' => 'e4e9e6b4-f421-42db-bafe-10c3a7ff45fc',
+                'name' => 'Menu Access',
+                'icon' => '-',
+                'url' => 'menu-access',
+                'status' => 1,
                 'order_num' => 3,
             ],
             [

@@ -13,7 +13,7 @@ class MenuAccess extends Migration
      */
     public function up()
     {
-        Schema::create('menu_access', function (Blueprint $table) {
+        Schema::create('menus_access', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('role_id')->nullable(false);
             $table->uuid('menu_id')->nullable(false);

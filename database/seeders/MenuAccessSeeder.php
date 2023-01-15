@@ -14,11 +14,20 @@ class MenuAccessSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('menu_access')->insert([
+        DB::table('menus_access')->insert([
             [
                 'id' => '14e02c3d-6316-40e9-b08e-0f0b412940cb',
                 'role_id' => '62dffe94-5b08-45fe-9121-eb8177fa5721',
                 'menu_id' => '2df2c2c1-8348-4c5f-ab48-452701566bc7',
+                'view' => 1,
+                'create' => 1,
+                'update' => 1,
+                'delete' => 1,
+            ],
+            [
+                'id' => '9f596628-949f-11ed-a1eb-0242ac120002',
+                'role_id' => '62dffe94-5b08-45fe-9121-eb8177fa5721',
+                'menu_id' => '8240964a-f1ea-4cfe-9930-e5390739a212',
                 'view' => 1,
                 'create' => 1,
                 'update' => 1,

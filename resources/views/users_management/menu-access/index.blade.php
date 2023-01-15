@@ -1,37 +1,38 @@
-<?php $__env->startSection('title'); ?>
-    Menus
-    <?php echo e($title); ?>
+@extends('layouts.admin.master')
 
-<?php $__env->stopSection(); ?>
+@section('title')
+    Menu Access
+    {{ $title }}
+@endsection
 
-<?php $__env->startPush('css'); ?>
-<?php $__env->stopPush(); ?>
+@push('css')
+@endpush
 
-<?php $__env->startSection('content'); ?>
+@section('content')
     
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
                 <div class="col-lg-6">
-                    <h3>Menus</h3>
+                    <h3>Menu Access</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo e(route('index')); ?>">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
                         <li class="breadcrumb-item">Users Management</li>
-                        <li class="breadcrumb-item active">Menus</li>
+                        <li class="breadcrumb-item active">Menu Access</li>
                     </ol>
                 </div>
                 <div class="col-lg-6">
                     
                 <!-- Bookmark Start-->
-                <?php if($access['create'] == 1): ?>
+                @if($access['create'] == 1)
                     <div class="bookmark">
                         <ul>
                             <li>
-                                <button class="btn btn-primary" type="button" id="btn_insert"><i class="fa fa-plus-square"></i> Menu</button>
+                                <button class="btn btn-primary" type="button" id="btn_insert"><i class="fa fa-plus-square"></i> Menu Access</button>
                             </li>
                         </ul>
                     </div>
-                <?php endif; ?>
+                @endif
                 <!-- Bookmark Ends-->
                 </div>
             </div>
@@ -48,12 +49,11 @@
 	                            <thead>
 	                                <tr>
 	                                    <th>No</th>
-	                                    <th>Name</th>
-	                                    <th>Prefix</th>
-	                                    <th>Url</th>
-                                        <th>Icon</th>
-                                        <th>Order Num</th>
-                                        <th>Status</th>
+	                                    <th>Menu Name</th>
+	                                    <th>View</th>
+	                                    <th>Create</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
                                         <th>Action</th>
 	                                </tr>
 	                            </thead>
@@ -82,7 +82,7 @@
                             <select class="form-select" name="parent_id" id="parent_id">
                                 <option value="">Parent</option>
                                 <?php foreach($menus as $menu):?>
-                                    <option value="<?php echo e($menu->id); ?>"><?php echo e($menu->name); ?></option>
+                                    <option value="{{ $menu->id }}">{{ $menu->name }}</option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -123,9 +123,8 @@
         </div>
     </div>
 
-    <?php $__env->startPush('scripts'); ?>
-    <?php echo $__env->make('services.menus.menus', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <?php $__env->stopPush(); ?>
+    @push('scripts')
+    @include('services.menu-access.menu-access')
+    @endpush
 
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/laravel-admin-starter-pack/resources/views/users_management/menus/index.blade.php ENDPATH**/ ?>
+@endsection

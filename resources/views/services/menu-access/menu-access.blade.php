@@ -9,7 +9,7 @@
         $('#dataTableMenus').DataTable({
 			"bLengthChange":true,
 			"pageLength":10,
-			"ajax" : "{{ url('api/menus') }}",
+			"ajax" : "{{ url('api/menu-access') }}",
 			"columns": 
 			[
 			{ 
@@ -18,23 +18,13 @@
 					return no++;
 				}
 			},
-			{ targets:[1],data: "name" },
-			{ targets:[2],data: "prefix" },
-            { targets:[3],data: "url" },
-            { targets:[4],data: "icon" },
-            { targets:[5],data: "order_num" },
-            { 
-                targets:[6],
-                render: function (data, type, full, meta){
-                    if(full.status == 1){
-                        return '<span class="badge badge-primary">Active</span>';
-                    }else{
-                        return '<span class="badge badge-danger">Non Active</span>';
-                    }
-                }
-            },
+			{ targets:[1],data: "menu.name" },
+			{ targets:[2],data: "view" },
+            { targets:[3],data: "create" },
+            { targets:[4],data: "update" },
+            { targets:[5],data: "delete" },
 			{
-				targets:[7],
+				targets:[6],
 				render: function (data, type, full, meta){
                     if(update_access == 1){
 					    var btn_edit='<button class="btn btn-warning btn-sm" name="btn_edit" title="Edit" value="'+full.id+'"><i class="fa fa-pencil"></i> Edit</button>';
@@ -73,9 +63,9 @@
             var url = '';
 			
 			if($('#postType').val() == 'create'){
-				url = "{{ url('api/menus/create') }}";
+				url = "{{ url('api/menu-access/create') }}";
 			}else{
-                url = "{{ url('api/menus/update') }}/"+_selectedID;
+                url = "{{ url('api/menu-access/update') }}/"+_selectedID;
 			}
 
 			$.ajax({
@@ -87,7 +77,7 @@
 			.done(function(res) {
                 $('#form-menus').modal('hide')
 				notificationSuccess(res.message)
-                autoReload('#dataTableMenus', '{{ url("api/menus") }}')
+                autoReload('#dataTableMenus', '{{ url("api/menu-access") }}')
 				
 				document.getElementById("form").reset();
 			});
@@ -99,7 +89,7 @@
 			_selectedID=_selectRowObj[0].value;
 
 			$.ajax({
-				url: "{{ url('api/menus') }}/"+_selectedID,
+				url: "{{ url('api/menu-access') }}/"+_selectedID,
 				type: 'GET',
 				dataType: 'json',
 			})
@@ -134,14 +124,14 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                        url: "{{ url('api/menus/delete') }}/"+_selectedID,
+                        url: "{{ url('api/menu-access/delete') }}/"+_selectedID,
                         type: 'DELETE',
                         dataType: 'json',
                     })
                     .done(function(res) {
                         notificationSuccess(res.message);
                         
-                        autoReload('#dataTableMenus', '{{ url("api/menus") }}')
+                        autoReload('#dataTableMenus', '{{ url("api/menu-access") }}')
                     });
                 } else {
                     notificationSuccess('Deleted Menu Failed, Data is Save')
