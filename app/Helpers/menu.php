@@ -7,9 +7,6 @@ if(! function_exists('getMenuParent')){
 	function getMenuParent()
 	{ 
         $data = Menus::with('access')
-				->whereHas('access', function($q){
-					$q->where('role_id', Session::get('role_id'));
-				})
 				->where('parent_id', null)
 				->orderBy('order_num', 'ASC')
 				->get();
@@ -22,9 +19,6 @@ if(! function_exists('getMenuPrefix')){
 	function getMenuPrefix()
 	{ 
         $data = Menus::with('access')
-				->whereHas('access', function($q){
-					$q->where('role_id', Session::get('role_id'));
-				})
 				->where('prefix', '!=', "-")
 				->where('status', 1)
 				->orderBy('order_num', 'ASC')
@@ -38,9 +32,6 @@ if(! function_exists('getMenuItem')){
 	function getMenuItem()
 	{ 
         $data = Menus::with('access')
-				->whereHas('access', function($q){
-					$q->where('role_id', Session::get('role_id'));
-				})
 				->where('prefix', "-")
 				->where('url', '!=', '#')
 				->where('status', 1)
@@ -54,7 +45,11 @@ if(! function_exists('getMenuItem')){
 if(! function_exists('getMenuAccess')){
 	function getMenuAccess($menu)
 	{ 
-        $data = Menus::with('access')->where('name', $menu)->where('status', 1)->orderBy('order_num', 'ASC')->first();
+        $data = Menus::with('access')
+					->where('name', $menu)
+					->where('status', 1)
+					->orderBy('order_num', 'ASC')
+					->first();
 
 		$access = [
 			'view'   => $data->access ? $data->access->view : 0,

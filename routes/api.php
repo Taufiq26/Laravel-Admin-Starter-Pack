@@ -37,7 +37,7 @@ Route::prefix('menus')->group( function(){
 });
 
 // Menus
-Route::prefix('menu-access')->group( function(){
+Route::prefix('menus-access')->group( function(){
     Route::get('/', [MenusAccessController::class, 'retrive']);
     Route::get('/{id}', [MenusAccessController::class, 'retriveById']);
     Route::get('/by-role/{role_id}', [MenusAccessController::class, 'retriveByRole']);

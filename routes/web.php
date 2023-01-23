@@ -58,7 +58,7 @@ Route::middleware('sessionAuth')->group( function () {
         Route::get('/menus', [MenusController::class, 'index'])->name('menus');
     
         // Menu Access
-        Route::get('/menu-access', [MenusAccessController::class, 'index'])->name('menu-access');
+        Route::get('/menus-access', [MenusAccessController::class, 'index'])->name('menus-access');
     
         // Users
         Route::get('/users', [UsersController::class, 'index'])->name('users');

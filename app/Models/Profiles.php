@@ -17,7 +17,7 @@ class Profiles extends Model
     public $keyType = 'string';
     protected $table = 'profiles';
 
-    function users()
+    public function users()
     {
         return $this->hasOne(Users::class, 'id', 'user_id');
     }

@@ -6,5 +6,6 @@
 - [x] Authentication
 - [x] Users & Roles Management
 - [x] Dynamic menus
-- [ ] Setup menu access
-- [ ] Ticket Management (Complaint or just a message from user)
+- [x] Setup menu access
+- [ ] Messsage from Users (Contact Us)
+- [ ] Ticketing System

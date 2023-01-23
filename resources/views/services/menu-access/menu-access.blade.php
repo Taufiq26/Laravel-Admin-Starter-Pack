@@ -28,9 +28,9 @@
             var url = '';
 			
 			if($('#postType').val() == 'create'){
-				url = "{{ url('api/menu-access/create') }}";
+				url = "{{ url('api/menus-access/create') }}";
 			}else{
-                url = "{{ url('api/menu-access/update') }}/"+_selectedID;
+                url = "{{ url('api/menus-access/update') }}/"+_selectedID;
 			}
 
 			$.ajax({
@@ -42,7 +42,8 @@
 			.done(function(res) {
                 $('#form-menus').modal('hide')
 				notificationSuccess(res.message)
-                autoReload('#dataTableMenus', '{{ url("api/menu-access") }}')
+                // autoReload('#dataTableMenus', '{{ url("api/menus-access") }}')
+                $('#refresh').click()
 				
 				document.getElementById("form").reset();
 			});
@@ -54,7 +55,7 @@
 			_selectedID=_selectRowObj[0].value;
 
 			$.ajax({
-				url: "{{ url('api/menu-access') }}/"+_selectedID,
+				url: "{{ url('api/menus-access') }}/"+_selectedID,
 				type: 'GET',
 				dataType: 'json',
 			})
@@ -65,13 +66,39 @@
 				_selectedID = res.data.id;
                 
                 document.getElementById('id').value = res.data.id;
-                document.getElementById('parent_id').value = res.data.parent_id ?? "";
-                document.getElementById('name').value = res.data.name;
-                document.getElementById('prefix').value = res.data.prefix;
-                document.getElementById('url').value = res.data.url;
-                document.getElementById('icon').value = res.data.icon;
-                document.getElementById('order_num').value = res.data.order_num;
-                document.getElementById('status').value = res.data.status;
+                document.getElementById('role_id').value = res.data.role_id ?? "";
+                document.getElementById('menu_id').value = res.data.menu_id ?? "";
+                if (res.data.view == 1) {
+                    document.getElementById('view1').checked = true;
+                    document.getElementById('view2').checked = false;
+                } else {
+                    document.getElementById('view1').checked = false;
+                    document.getElementById('view2').checked = true;
+                }
+
+                if (res.data.create == 1) {
+                    document.getElementById('create1').checked = true;
+                    document.getElementById('create2').checked = false;
+                } else {
+                    document.getElementById('create1').checked = false;
+                    document.getElementById('create2').checked = true;
+                }
+
+                if (res.data.update == 1) {
+                    document.getElementById('update1').checked = true;
+                    document.getElementById('update2').checked = false;
+                } else {
+                    document.getElementById('update1').checked = false;
+                    document.getElementById('update2').checked = true;
+                }
+
+                if (res.data.delete == 1) {
+                    document.getElementById('delete1').checked = true;
+                    document.getElementById('delete2').checked = false;
+                } else {
+                    document.getElementById('delete1').checked = false;
+                    document.getElementById('delete2').checked = true;
+                }
 			});
 		});
 
@@ -89,14 +116,15 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                        url: "{{ url('api/menu-access/delete') }}/"+_selectedID,
+                        url: "{{ url('api/menus-access/delete') }}/"+_selectedID,
                         type: 'DELETE',
                         dataType: 'json',
                     })
                     .done(function(res) {
                         notificationSuccess(res.message);
                         
-                        autoReload('#dataTableMenus', '{{ url("api/menu-access") }}')
+                        // autoReload('#dataTableMenus', '{{ url("api/menus-access") }}')
+                        $('#refresh').click()
                     });
                 } else {
                     notificationSuccess('Deleted Menu Failed, Data is Save')
@@ -117,7 +145,7 @@
             $('#dataTableMenus').DataTable({
                 "bLengthChange":true,
                 "pageLength":10,
-                "ajax" : "{{ url('api/menu-access/by-role') }}/" + role_id,
+                "ajax" : "{{ url('api/menus-access/by-role') }}/" + role_id,
                 "columns": 
                 [
                 { 
@@ -126,7 +154,16 @@
                         return no++;
                     }
                 },
-                { targets:[1],data: "menu.name" },
+                { 
+                    targets:[1],
+                    render: function (data, type, full, meta){
+                        if(full.menu.parent_id == null){
+                            return full.menu.name + ' [Parent]';
+                        }else{
+                            return full.menu.name + ' [in '+full.menu.parent.name+']';
+                        }
+                    } 
+                },
                 { 
                     targets:[2],
                     render: function (data, type, full, meta){

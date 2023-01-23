@@ -56,7 +56,7 @@
                                 <button 
                                     id="refresh" 
                                     type="button" 
-                                    class="btn btn-primary w-auto" 
+                                    class="btn btn-primary" 
                                     style="bottom: 0; position: absolute;"
                                 >
                                 Refresh</button>
@@ -97,45 +97,78 @@
                 <input type="hidden" name="id" id="id">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Menu</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Menu Access</h5>
                         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">Parent</label>
-                            <select class="form-select" name="parent_id" id="parent_id">
-                                <option value="">Parent</option>
-                                <?php foreach($menus as $menu):?>
-                                    <option value="<?php echo e($menu->id); ?>"><?php echo e($menu->name); ?></option>
+                            <label for="">Role</label>
+                            <select class="form-select" name="role_id" id="role_id">
+                                <?php foreach($roles as $role):?>
+                                    <option value="<?php echo e($role->id); ?>"><?php echo e($role->name); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Prefix Url</label> <small>( optional )</small>
-                            <input type="text" class="form-control" name="prefix" placeholder="Enter Prefix" id="prefix" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Url</label>
-                            <input type="text" class="form-control" name="url" placeholder="Enter Url" id="url" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Icon</label>  <small>( optional )</small>
-                            <input type="text" class="form-control" name="icon" placeholder="Enter icon" id="icon" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Order Num</label>
-                            <input type="number" class="form-control" name="order_num" placeholder="Enter Order Num" id="order_num" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Status</label>
-                            <select class="form-select" name="status" id="status">
-                                <option value="1">Active</option>
-                                <option value="0">Non Active</option>
+                            <label for="">Menu</label>
+                            <select class="form-select" name="menu_id" id="menu_id">
+                                <?php foreach($menus as $menu):?>
+                                    <option value="<?php echo e($menu->id); ?>"><?php echo e($menu->name); ?> [<?php echo e(($menu->parent_id == null) ? 'Parent' : 'in '.$menu->parent->name); ?>]</option>
+                                <?php endforeach; ?>
                             </select>
+                        </div>
+
+                        <hr/>
+                        <h6>Grant the Access</h6>
+                        <hr/>
+
+                        <div class="form-group">
+                            <label for="">View</label>
+                            <br/>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="view" id="view1" value="1" checked>
+                                <label class="form-check-label" for="view1">Allow</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="view" id="view2" value="0">
+                                <label class="form-check-label" for="view2">Deny</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Create</label>
+                            <br/>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="create" id="create1" value="1" checked>
+                                <label class="form-check-label" for="create1">Allow</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="create" id="create2" value="0">
+                                <label class="form-check-label" for="create2">Deny</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Update</label>
+                            <br/>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="update" id="update1" value="1" checked>
+                                <label class="form-check-label" for="update1">Allow</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="update" id="update2" value="0">
+                                <label class="form-check-label" for="update2">Deny</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Delete</label>
+                            <br/>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="delete" id="delete1" value="1" checked>
+                                <label class="form-check-label" for="delete1">Allow</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="delete" id="delete2" value="0">
+                                <label class="form-check-label" for="delete2">Deny</label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

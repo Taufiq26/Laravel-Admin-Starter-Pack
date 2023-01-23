@@ -15,7 +15,7 @@ class MenusAccess extends Model
 
     public function menu()
     {
-        return $this->belongsTo(Menus::class);
+        return $this->hasOne(Menus::class, 'id', 'menu_id');
     }
 
     public function role()

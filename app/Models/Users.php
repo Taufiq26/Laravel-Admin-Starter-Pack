@@ -15,7 +15,7 @@ class Users extends Model
     public $keyType = 'string';
     protected $table = 'users';
 
-    function roles()
+    public function roles()
     {
         return $this->hasOne(Roles::class, 'id', 'role_id');
     }
