@@ -36,7 +36,7 @@ Route::prefix('menus')->group( function(){
     Route::delete('/delete/{id}', [MenusController::class, 'delete']);
 });
 
-// Menus
+// Menus Access
 Route::prefix('menus-access')->group( function(){
     Route::get('/', [MenusAccessController::class, 'retrive']);
     Route::get('/{id}', [MenusAccessController::class, 'retriveById']);

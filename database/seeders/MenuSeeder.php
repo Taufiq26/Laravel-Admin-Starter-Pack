@@ -68,7 +68,7 @@ class MenuSeeder extends Seeder
             [
                 'id' => '898a77c5-e21f-46f7-9092-3eb71aef1f7e',
                 'prefix' => '-',
-                'parent_id' => NULL,
+                'parent_id' => null,
                 'name' => 'General',
                 'icon' => '-',
                 'url' => '#',
@@ -78,7 +78,7 @@ class MenuSeeder extends Seeder
             [
                 'id' => '9f8b78b9-5856-4653-8970-ea125971f4cb',
                 'prefix' => '-',
-                'parent_id' => NULL,
+                'parent_id' => null,
                 'name' => 'Setup',
                 'icon' => '-',
                 'url' => '#',
